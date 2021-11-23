@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewState"
+            type="com.faskn.app.weatherapp.ui.dashboard.CurrentWeatherViewState" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{viewState.data.main.getColor1()}"
+        app:cardElevation="8dp"
+        android:fitsSystemWindows="true"
+        android:visibility="@{viewState.isLoading() ? View.INVISIBLE : View.VISIBLE}"
+        tools:visibility="invisible">
+
+        <RelativeLayout
+            android:id="@+id/rootView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/imageViewWeatherIcon"
+                android:layout_width="124dp"
+                android:layout_height="124dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                app:setWeatherIcon="@{viewState.data.getCurrentWeather().icon}"
+                tools:src="@drawable/a10d_svg" />
+
+            <TextView
+                android:id="@+id/textViewTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:text="@{viewState.data.main.getTempString()}"
+                android:textColor="@color/white"
+                android:textSize="80sp"
+                tools:text="25°" />
+
+            <TextView
+                android:id="@+id/textViewWeatherMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewTemperature"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:text="@{viewState.data.getCurrentWeather().main}"
+                android:textColor="@color/white"
+                android:textSize="23sp"
+                tools:text="Clouds &amp; Sun" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/details"
+                android:layout_marginTop="20sp"
+                android:layout_below="@id/textViewWeatherMain"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                >
+                <TextView
+                    android:id="@+id/textViewMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="24dp"
+                    android:text="@{viewState.data.main.getTempMinString()}"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    tools:text="35°" />
+                <TextView
+                    android:id="@+id/textViewMax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="36dp"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="24dp"
+                    android:text="@{viewState.data.main.getTempMaxString()}"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    tools:text="35°" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/windvis"
+                android:layout_below="@id/details"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                >
+                <TextView
+                    android:id="@+id/textWind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="24dp"
+                    android:text="@{viewState.data.wind.getWindSpeed()}"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    tools:text="35°" />
+                <TextView
+                    android:id="@+id/Visibility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="24dp"
+                    android:text="@{viewState.data.visibility()}"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    tools:text="35°" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/humid"
+                android:layout_below="@id/windvis"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                >
+                <TextView
+                    android:id="@+id/textHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="24dp"
+                    android:text="@{viewState.data.main.getHumidityString()}"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    tools:text="35°" />
+                <TextView
+                    android:id="@+id/Pressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="36dp"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="24dp"
+                    android:text="@{viewState.data.main.getPressureString()}"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    tools:text="35°" />
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/textupdated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/humid"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="11dp"
+                android:text="@{viewState.data.updatedAt()}"
+                android:textColor="@color/white"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
